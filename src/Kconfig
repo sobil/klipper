@@ -12,6 +12,8 @@ choice
     prompt "Micro-controller Architecture"
     config MACH_AVR
         bool "Atmega AVR"
+    config MACH_ESP32
+        bool "ESP32"
     config MACH_ATSAM
         bool "SAM3/SAM4/SAM E70"
     config MACH_ATSAMD
