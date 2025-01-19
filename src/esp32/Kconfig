@@ -1,0 +1,19 @@
+# Kconfig settings for ESP processors
+
+if MACH_ESP32
+
+config BOARD_DIRECTORY
+    string
+    default "esp32"
+
+choice
+    prompt "Processor model"
+    config MACH_esp32wroom32
+        bool "esp32wroom32"
+endchoice
+
+config MCU
+    string
+    default "esp32" if MACH_esp32wroom32
+
+endif
