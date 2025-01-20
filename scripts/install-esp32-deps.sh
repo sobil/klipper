@@ -39,14 +39,24 @@ fi
 # ######################################################################
 
 
-# sudo apt-get update
-# sudo apt-get install cmake
-# mkdir -p ~/esp
-# cd ~/esp
-# git clone -b v5.4 --recursive https://github.com/espressif/esp-idf.git
+sudo apt-get install -y cmake libusb-1.0-0 python3.10-venv build-essential gcc g++
+if [ -x "$(command -v cmake)" ]; then
+    echo "CMake is already installed"
+else
+    echo "Installing CMake"
+fi
 
-# cd ~/esp/esp-idf
-# ./install.sh esp32
+
+if [ -f ~/esp/esp-idf/idf.py ]; then
+    echo "esp-idf.py installed in ~/esp/esp-idf"
+else
+    mkdir -p ~/esp
+    cd ~/esp
+    git clone -b v5.4 --recursive https://github.com/espressif/esp-idf.git || true
+    ~/esp/esp-idf/install.sh esp32
+fi
+
+
 
 
 

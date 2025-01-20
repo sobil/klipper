@@ -3,19 +3,21 @@
 # Use the esp toolchain
 CROSS_PREFIX=xtensa-esp32-elf-
 
+dirs-y += src/esp32 src/generic
 export PATH := $(PATH):$(shell pwd)/thirdparty/xtensa-esp-elf/bin
 
+
 THIRDPARTY_INCLUDE_DIRS := $(shell find ~/esp/esp-idf/components -name "include" -type d)
-CFLAGS += -I$(HOME)/esp/esp-idf/components/freertos/config/include/freertos
 CFLAGS += $(foreach dir, $(THIRDPARTY_INCLUDE_DIRS), -I$(dir))
-dirs-y += src/esp32 src/generic
-
-
-## This all seems wrong... need to fix this
-CFLAGS += -I/usr/include/bsd
+CFLAGS += -I$(shell pwd)/thirdparty/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/14.2.0/include
+CFLAGS += -I$(HOME)/esp/esp-idf/components/freertos/config/include/freertos
+CFLAGS += -I$(HOME)/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos
+CFLAGS += -I$(HOME)/esp/esp-idf/components/soc/esp32/include
+CFLAGS += -I$(HOME)/esp/esp-idf/components/soc/esp32/register
+CFLAGS += -I$(HOME)/esp/esp-idf/components/newlib/platform_include
 CFLAGS += -I/usr/include
+CFLAGS += -I/usr/include/bsd
 CFLAGS += -I/usr/include/aarch64-linux-gnu
-
 
 # Add avr source files
 src-y += esp32/main.c esp32/timer.c
