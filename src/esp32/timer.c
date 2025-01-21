@@ -30,7 +30,7 @@ volatile bool dispatch_timer = false;
 
 // Return the current time (in absolute clock ticks).
 uint32_t timer_read_time(void) {
-  uint32_t count;
+  uint64_t count;
   ESP_ERROR_CHECK(gptimer_get_raw_count(gptimer, &count));
   return count;
 }

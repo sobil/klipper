@@ -1,9 +1,9 @@
 
 #include <string.h>
-#include "autoconf.h" // CONFIG_MCU
-#include "board/misc.h" // console_sendf
-#include "command.h" // DECL_CONSTANT
-#include "sched.h" // sched_main
+#include "autoconf.h"       // CONFIG_MCU
+#include "board/misc.h"     // console_sendf
+#include "command.h"        // DECL_CONSTANT
+#include "sched.h"          // sched_main
 #include "board/internal.h" // console_setup
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
@@ -11,10 +11,9 @@
 
 DECL_CONSTANT_STR("MCU", CONFIG_MCU);
 
-
 void command_config_reset(uint32_t *args)
 {
-    if (! sched_is_shutdown())
+    if (!sched_is_shutdown())
         shutdown("config_reset only available when shutdown");
     esp_restart();
 }
@@ -28,11 +27,9 @@ void main_task(void *pvparameters)
         sched_main();
     }
     vTaskDelete(NULL);
-    
 }
 
-void app_main(void)
+int main(void)
 {
-    xTaskCreatePinnedToCore(main_task, "main_task", 4096, NULL, 20, NULL,
-                              0);
+    // xTaskCreatePinnedToCore(main_task, "main_task", 4096, NULL, 20, NULL,0);
 }
